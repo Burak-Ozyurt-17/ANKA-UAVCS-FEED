@@ -1,0 +1,4 @@
+ultralytics, 
+Flask, 
+flask-cors, 
+inputs
