@@ -1,4 +1,4 @@
-What is the framerate there import cv2
+import cv2
 import math,random,time
 import numpy as np
 from ultralytics import YOLO
@@ -224,3 +224,4 @@ if __name__ == "__main__":
     Thread(target=read_controller_loop, daemon=True).start()
     Thread(target=updated_data, daemon=True).start()
     app.run(host="0.0.0.0", port=8000, debug=False)
+
