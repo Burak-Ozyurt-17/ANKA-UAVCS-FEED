@@ -1,4 +1,4 @@
-ultralytics, 
-Flask, 
-flask-cors, 
+ultralytics
+Flask
+flask-cors 
 inputs
