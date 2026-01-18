@@ -1,4 +1,10 @@
-ultralytics
-Flask
-flask-cors 
+ultralytics --no-deps
+torch==2.2.2+cpu
+torchvision==0.17.2+cpu
+numpy
+opencv-python-headless
+pillow
+flask
+flask-cors
 inputs
+
