@@ -21,13 +21,25 @@ lat = 28.9784
 lon = 41.0082
 angle = 0.0 
 cam = True
-
+SPEED_FACTOR = 0.00002
 
 def wait_user_input():
-    global lat, lon, alt, angle
+    global lat, lon, altitude, angle
     while True:
+        if keyboard.is_pressed("up"):
+            altitude += 0.1
+        if keyboard.is_pressed("down"):
+            altitude -= 0.1
+        
+        radian_angle = angle * math.pi / 180
+
         if keyboard.is_pressed("w"):
-            lat += 0.005
+            lon += math.sin(radian_angle) * SPEED_FACTOR
+            lat += math.cos(radian_angle) * SPEED_FACTOR
+        if keyboard.is_pressed("s"):
+            lon += math.sin(radian_angle) * -SPEED_FACTOR
+            lat += math.cos(radian_angle) * -SPEED_FACTOR
+        
         time.sleep(0.02)
     
 def generate_frames():
@@ -68,7 +80,7 @@ def generate_frames():
 
 @app.route("/data", methods=['GET', 'POST'])
 def data():
-    global altitude, temp, humidity, smoke, fire, lat, lon
+    global altitude, angle, temp, humidity, smoke, fire, lat, lon
     temp += random.uniform(-0.08, 0.08)
     humidity += random.uniform(-0.1, 0.1)
     smoke += random.uniform(-0.3, 0.3)
@@ -95,4 +107,4 @@ def index():
 if __name__ == "__main__":
     Input_Thread = threading.Thread(target=wait_user_input)
     Input_Thread.start()
-    app.run(host="0.0.0.0", port=8000, debug=False)
+    app.run(host="0.0.0.0", port=8000, debug=False) 
