@@ -1,16 +1,16 @@
 import cv2
-import math,random,time
+import math, random, time
 import numpy as np
+import keyboard
+import threading
 from ultralytics import YOLO
 from flask import Flask, Response, jsonify
 from flask_cors import CORS
-
 
 model = YOLO("best.pt")    
 cap = cv2.VideoCapture(0)
 app = Flask(__name__)
 CORS(app)
-
 
 altitude = 50.0
 temp = 25.0
@@ -23,6 +23,13 @@ angle = 0.0
 cam = True
 
 
+def wait_user_input():
+    global lat, lon, alt, angle
+    while True:
+        if keyboard.is_pressed("w"):
+            lat += 0.005
+        time.sleep(0.02)
+    
 def generate_frames():
     global fire, cam
     h, w = 480, 640  
@@ -76,9 +83,16 @@ def data():
         "angle": round(angle, 2),
     })
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/camera", methods=['GET', 'POST'])
 def stream():
     return Response(generate_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
+@app.route("/", methods=['GET','POST'])
+def index():
+    return "Sunucu Aktif"
+
+
 if __name__ == "__main__":
+    Input_Thread = threading.Thread(target=wait_user_input)
+    Input_Thread.start()
     app.run(host="0.0.0.0", port=8000, debug=False)
