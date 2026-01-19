@@ -17,11 +17,11 @@ temp = 25.0
 humidity = 50.0
 smoke = 55.0
 fire = False
-lat = 28.9784
-lon = 41.0082
+lat = 30.3306
+lon = 40.7392
 angle = 0.0 
 cam = True
-SPEED_FACTOR = 0.00002
+SPEED_FACTOR = 0.000002
 
 def wait_user_input():
     global lat, lon, altitude, angle
@@ -39,7 +39,13 @@ def wait_user_input():
         if keyboard.is_pressed("s"):
             lon += math.sin(radian_angle) * -SPEED_FACTOR
             lat += math.cos(radian_angle) * -SPEED_FACTOR
-        
+        if keyboard.is_pressed("a"):
+            lon += math.sin(radian_angle + math.pi / 2) * SPEED_FACTOR
+            lat += math.cos(radian_angle + math.pi / 2) * SPEED_FACTOR
+        if keyboard.is_pressed("d"):
+            lon += math.sin(radian_angle - math.pi / 2) * SPEED_FACTOR
+            lat += math.cos(radian_angle - math.pi / 2) * SPEED_FACTOR
+
         time.sleep(0.02)
     
 def generate_frames():
