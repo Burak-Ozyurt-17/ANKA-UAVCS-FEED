@@ -1,6 +1,6 @@
 ANKA FEED PROJECT
 
-This is the data backend for the project ANKA-UAVCS. This platform provides a simple set of data and includes a Yolov8 Image Recognition Model. With a keyboard flight simulation
+This is the data backend for the project ANKA-UAVCS. This platform provides a simple set of data and includes a Yolov8 Image Recognition Model and a keyboard flight simulation
 
 Instructions:
 
