@@ -8,7 +8,7 @@ from flask import Flask, Response, jsonify
 from flask_cors import CORS
 
 model = YOLO("best.pt")
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 app = Flask(__name__)
 CORS(app)
 
@@ -17,8 +17,8 @@ temp = 25.0
 humidity = 50.0
 smoke = 55.0
 fire = False
-lat = 30.3306
-lon = 40.7392
+lat = -118.37837
+lon = 34.07328
 angle = 0.0
 cam = True
 SPEED_FACTOR = 0.000002
